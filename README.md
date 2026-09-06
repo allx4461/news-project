@@ -33,3 +33,7 @@
 
 ### структура 
 в папке `/scripts` будут скрипты `data_exploration` для составления паспортов данных, `download_data` для потоковой загрузки датасета (если делать все 15гб разом, произойдет переполнение оперативной памяти),`filter_data` для обработки пропусков и правильного датирования,`assemble_data` для сборки итогового датасета `новости + цены`
+
+### ход работы
+1. информация о датасете:
+dict_keys(['Date', 'Article_title', 'Stock_symbol', 'Url', 'Publisher', 'Author', 'Article', 'Lsa_summary', 'Luhn_summary', 'Textrank_summary', 'Lexrank_summary']
