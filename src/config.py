@@ -19,3 +19,7 @@ SPLIT = "train"
 
 START_DATE = pd.Timestamp("2011-03-03")
 END_DATE = pd.Timestamp("2023-12-16")
+
+SENTIMENT_MODEL_NAME = "ProsusAI/finbert"
+SENTIMENT_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_sentiment.csv"
+AGGREGATION_METHOD = "mean"  # как действуем с днями на которые приходится несколько новостей
