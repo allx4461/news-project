@@ -1,14 +1,15 @@
-
-from datasets import load_dataset
-import pandas as pd
-from pathlib import Path
-from itertools import islice
-
 import sys
+from itertools import islice
+from pathlib import Path
+
+import pandas as pd
+from datasets import load_dataset
+
+from src.config import CHUNKSIZE, DATASET_CONFIG, DATASET_NAME, RAW_DATA_PATH, SPLIT, USECOLS
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
-from src.config import CHUNKSIZE, RAW_DATA_PATH, USECOLS, DATASET_NAME, DATASET_CONFIG, SPLIT
+
 
 def iter_chunks(stream, chunk_size: int):
     """итератор чанков"""
@@ -18,11 +19,9 @@ def iter_chunks(stream, chunk_size: int):
 
 
 def download_dataset(
-    output_path: Path = RAW_DATA_PATH,
-    chunk_size: int = CHUNKSIZE,
-    cols: list[str] = USECOLS
+    output_path: Path = RAW_DATA_PATH, chunk_size: int = CHUNKSIZE, cols: list[str] = USECOLS
 ) -> None:
-    """лениво скачивает датасет нужные колонки и чанками укладывает его в хард """
+    """лениво скачивает датасет нужные колонки и чанками укладывает его в хард"""
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 

@@ -1,24 +1,24 @@
+import sys
 from pathlib import Path
 
 import pandas as pd
-import sys
+
+from src.config import CHUNKSIZE, RAW_DATA_PATH
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
-from src.config import RAW_DATA_PATH, CHUNKSIZE
-DATA_PATH=RAW_DATA_PATH
+DATA_PATH = RAW_DATA_PATH
 
 
 def explore_data(data_path: Path = DATA_PATH, chunksize: int = CHUNKSIZE) -> None:
-    """вывод информации о данных по принимаемому пути (всего рядов и колонок, пропущенных значений и разброс дат)"""
+    """вывод информации о данных по принимаемому пути (всего рядов и колонок,
+    пропущенных значений и разброс дат)"""
     total_rows = 0
     missing_values = {}
     date_min = None
     date_max = None
 
-    for chunk_number, chunk in enumerate(
-        pd.read_csv(data_path, chunksize=chunksize), start=1
-    ):
+    for chunk_number, chunk in enumerate(pd.read_csv(data_path, chunksize=chunksize), start=1):
         total_rows += len(chunk)
 
         for column, count in chunk.isna().sum().items():
