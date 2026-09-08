@@ -15,9 +15,7 @@ def get_nasdaq_trading_days(start: pd.Timestamp, end: pd.Timestamp) -> pd.Dateti
     return schedule.index.normalize()
 
 
-def assign_decision_day(
-    dates: pd.Series, trading_days: pd.DatetimeIndex, market_close_hour: int = 16
-) -> pd.Series:
+def assign_decision_day(dates: pd.Series, trading_days: pd.DatetimeIndex, market_close_hour: int = 16) -> pd.Series:
     """
     определение ближайшей торговой даты для каждой даты публикации новости.
     (если новость опубликована после закрытия рынка, то ближайшей торговой датой считается

@@ -18,9 +18,7 @@ def iter_chunks(stream, chunk_size: int):
         yield chunk
 
 
-def download_dataset(
-    output_path: Path = RAW_DATA_PATH, chunk_size: int = CHUNKSIZE, cols: list[str] = USECOLS
-) -> None:
+def download_dataset(output_path: Path = RAW_DATA_PATH, chunk_size: int = CHUNKSIZE, cols: list[str] = USECOLS) -> None:
     """лениво скачивает датасет нужные колонки и чанками укладывает его в хард"""
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
