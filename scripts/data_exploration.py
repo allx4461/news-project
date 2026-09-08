@@ -1,12 +1,9 @@
-import sys
 from pathlib import Path
 
 import pandas as pd
 
 from src.config import CHUNKSIZE, RAW_DATA_PATH
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.append(str(PROJECT_ROOT))
 DATA_PATH = RAW_DATA_PATH
 
 

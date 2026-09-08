@@ -1,4 +1,3 @@
-import sys
 from itertools import islice
 from pathlib import Path
 
@@ -6,9 +5,6 @@ import pandas as pd
 from datasets import load_dataset
 
 from src.config import CHUNKSIZE, DATASET_CONFIG, DATASET_NAME, RAW_DATA_PATH, SPLIT, USECOLS
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.append(str(PROJECT_ROOT))
 
 
 def iter_chunks(stream, chunk_size: int):

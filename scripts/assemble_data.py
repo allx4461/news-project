@@ -1,16 +1,12 @@
 # содержит функцию и ее запуск
 # assemble_news_with_decision_day, которая добавляет к новостям колонку decision_day
 
-import sys
 from pathlib import Path
 
 import pandas as pd
 
-from date_processing import assign_decision_day, get_nasdaq_trading_days
 from src.config import END_DATE, PROCESSED_DATA_PATH, START_DATE
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.append(str(PROJECT_ROOT))
+from src.date_processing import assign_decision_day, get_nasdaq_trading_days
 
 
 def assemble_news_with_decision_day(news_path: Path = PROCESSED_DATA_PATH) -> pd.DataFrame:
