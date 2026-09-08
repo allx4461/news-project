@@ -1,0 +1,17 @@
+[tool.ruff]
+line-length = 150
+exclude = ["data", "results", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+# E = pycodestyle-ошибки (пробелы, отступы)
+# F = pyflakes (неиспользуемые импорты, необъявленные переменные — F401, F821 которые ловили)
+# W = warnings (например W291 trailing whitespace)
+# I = isort (сортировка/группировка импортов)
+[tool.pyrefly]
+project-includes = ["src", "scripts", "tests"]# какие папки типизировать
+project-excludes = ["data", "results", "**/__pycache__"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."] # чтобы pytest видел `from src...`
+
