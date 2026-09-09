@@ -25,3 +25,4 @@ SENTIMENT_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_sentiment.cs
 DECISION_DATE_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_news_with_decision_day.csv"
 AGGREGATION_METHOD = "mean"  # как действуем с днями на которые приходится несколько новостей
 AGGREGATED_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_sentiment_aggregated.csv"
+AGGREGATED_PRICES_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_prices_aggregated.csv"
