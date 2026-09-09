@@ -15,7 +15,8 @@ def assemble_news_with_decision_day(news_path: Path = PROCESSED_DATA_PATH) -> pd
     для каждой даты публикации новости.
     """
     news = pd.read_csv(news_path)
-    trading_days = get_nasdaq_trading_days(START_DATE, END_DATE)
+    # без буфера был баг: новости после end_date откатывались в прошлое
+    trading_days = get_nasdaq_trading_days(START_DATE, END_DATE + pd.Timedelta(days=90))
     news["decision_day"] = assign_decision_day(news["Date"], trading_days)
     return news
 

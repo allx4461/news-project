@@ -20,6 +20,7 @@ def assign_decision_day(dates: pd.Series, trading_days: pd.DatetimeIndex, market
     определение ближайшей торговой даты для каждой даты публикации новости.
     (если новость опубликована после закрытия рынка, то ближайшей торговой датой считается
     следующий торговый день)
+    ! важно: trading_days должен быть с запасом, чтобы не было отката в прошлое (см. реализация в scripts/assemble_data.py)
     """
     dates = pd.to_datetime(dates).dt.tz_convert("America/New_York")
     day = dates.dt.normalize()
