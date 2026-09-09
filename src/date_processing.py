@@ -1,6 +1,8 @@
 # этот файл содержит функции:
 # получение торговых дней NASDAQ в нужный период
 # определение ближайшей торговой даты для каждой даты публикации новости
+from typing import Literal
+
 import numpy as np
 import pandas as pd
 import pandas_market_calendars as mcal
@@ -32,3 +34,19 @@ def assign_decision_day(dates: pd.Series, trading_days: pd.DatetimeIndex, market
     idx = np.searchsorted(td_values, decision_day.values, side="left")
     idx = np.clip(idx, 0, len(td_values) - 1)
     return pd.Series(td_values[idx], index=dates.index).dt.strftime("%Y-%m-%d")
+
+
+def aggregate_news_by_decision_day(news: pd.DataFrame, method: Literal["mean", "median", "max", "min"]) -> pd.DataFrame:
+    """
+    агрегирует новости по колонке decision_day, считая sentiment_score по выбранному методу (mean, median, max, min)
+    и количество новостей в день.
+    """
+    aggregated = (
+        news.groupby("decision_day")
+        .agg(
+            avg_sentiment_score=("sentiment_score", method),
+            news_count=("Article_title", "count"),
+        )
+        .reset_index()
+    )
+    return aggregated
