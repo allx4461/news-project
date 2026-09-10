@@ -12,15 +12,17 @@ from src.config import (
     AGGREGATION_METHOD,
     DECISION_DATE_OUTPUT_PATH,
     END_DATE,
+    PRICES_TARGET_OUTPUT_PATH,
     SENTIMENT_OUTPUT_PATH,
     START_DATE,
     TICKER,
 )
 from src.date_processing import aggregate_news_by_decision_day, assign_decision_day, get_nasdaq_trading_days
 from src.prices import load_prices
+from src.target import count_target
 
 
-def assemble_news_with_decision_day(news_path: Path = SENTIMENT_OUTPUT_PATH, output_path=DECISION_DATE_OUTPUT_PATH) -> pd.DataFrame:
+def assemble_news_with_decision_day_data(news_path: Path = SENTIMENT_OUTPUT_PATH, output_path=DECISION_DATE_OUTPUT_PATH) -> pd.DataFrame:
     """
     добавляет к новостям колонку decision_day с ближайшей торговой датой
     для каждой даты публикации новости.
@@ -35,7 +37,7 @@ def assemble_news_with_decision_day(news_path: Path = SENTIMENT_OUTPUT_PATH, out
         return news
 
 
-def aggregate_news_by_day(
+def aggregate_news_by_day_data(
     input_path=DECISION_DATE_OUTPUT_PATH, output_path=AGGREGATED_OUTPUT_PATH, method: Literal["mean", "median", "max", "min"] = AGGREGATION_METHOD
 ) -> pd.DataFrame:
     """
@@ -63,5 +65,17 @@ def add_yfinance_data(input_path=AGGREGATED_OUTPUT_PATH, output_path=AGGREGATED_
         return newdata
 
 
+def count_target_data(input_path=AGGREGATED_PRICES_OUTPUT_PATH, output_path=PRICES_TARGET_OUTPUT_PATH) -> pd.DataFrame:
+    """
+    считает таргет по формуле target_return = Close[next_day] / Open[next_day] - 1
+    """
+    data = pd.read_csv(input_path)
+    data_with_target = count_target(data)
+    if output_path:
+        data_with_target.to_csv(output_path, index=False)
+    else:
+        return data_with_target
+
+
 if __name__ == "__main__":
-    add_yfinance_data()
+    count_target_data()
