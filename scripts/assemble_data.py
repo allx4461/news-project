@@ -12,12 +12,14 @@ from src.config import (
     AGGREGATION_METHOD,
     DECISION_DATE_OUTPUT_PATH,
     END_DATE,
+    FEATURES_OUTPUT_PATH,
     PRICES_TARGET_OUTPUT_PATH,
     SENTIMENT_OUTPUT_PATH,
     START_DATE,
     TICKER,
 )
 from src.date_processing import aggregate_news_by_decision_day, assign_decision_day, get_nasdaq_trading_days
+from src.features import count_features
 from src.prices import load_prices
 from src.target import count_target
 
@@ -77,5 +79,16 @@ def count_target_data(input_path=AGGREGATED_PRICES_OUTPUT_PATH, output_path=PRIC
         return data_with_target
 
 
+def count_features_data(input_path=PRICES_TARGET_OUTPUT_PATH, output_path=FEATURES_OUTPUT_PATH) -> pd.DataFrame:
+    """
+    считает фичи по новостям и ценам"""
+    data = pd.read_csv(input_path)
+    data_with_features = count_features(data)
+    if output_path:
+        data_with_features.to_csv(output_path, index=False)
+    else:
+        return data_with_features
+
+
 if __name__ == "__main__":
-    count_target_data()
+    count_features_data()

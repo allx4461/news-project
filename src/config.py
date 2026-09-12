@@ -27,3 +27,13 @@ AGGREGATION_METHOD = "mean"  # как действуем с днями на ко
 AGGREGATED_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_sentiment_aggregated.csv"
 AGGREGATED_PRICES_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_prices_aggregated.csv"
 PRICES_TARGET_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_prices_target.csv"
+FEATURES_OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "nvda_features.csv"
+
+FEATURE_GROUPS = {
+    "momentum": ["return_1d", "return_5d", "return_20d", "price_to_sma_20"],
+    "volatility": ["volatility_5d", "hl_spread"],
+    "volume": ["volume_ratio_10d"],
+    "sentiment": ["score_3d", "finbert_diff_1d", "finbert_x_volume"],
+    "news_attention": ["news_count_ratio_7d", "has_news"],
+    "calendar": ["day_of_week_sin"],
+}
